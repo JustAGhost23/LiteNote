@@ -1,4 +1,4 @@
-package com.example.litenote.ui.theme
+package com.example.litenote.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
