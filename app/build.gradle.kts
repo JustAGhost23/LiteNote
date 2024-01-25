@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-android")
+    id("com.google.devtools.ksp")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -17,6 +20,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+    }
+
+    configurations {
+        all {
+            exclude("commons-logging")
         }
     }
 
@@ -51,19 +60,63 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${System.getProperty("kotlinVersion")}")
+
+    // Compose BOM
+    val composeBOMVersion = "2023.08.00"
+    implementation(platform("androidx.compose:compose-bom:${composeBOMVersion}"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:${composeBOMVersion}"))
+
+    // Lifecycle
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
+    // Compose
     implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Splash Screen API
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // Accompanist - Status Bar
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+
+    // Navigation
+    val navVersion = "2.7.6"
+    implementation("androidx.navigation:navigation-compose:${navVersion}")
+
+    // Coroutines
+    val coroutinesVersion = "1.7.1"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
+    // Live Data
+    val livedataVersion = "2.7.0"
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${livedataVersion}")
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+
+    // Room
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+
+    // Hilt
+    val hiltVersion = "2.48"
+    implementation("com.google.dagger:hilt-android:${hiltVersion}")
+    ksp("com.google.dagger:hilt-compiler:${hiltVersion}")
+
+    // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
