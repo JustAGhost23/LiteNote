@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
-    id("com.google.devtools.ksp")
+    id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
 }
 
@@ -107,12 +107,12 @@ dependencies {
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     // Hilt
     val hiltVersion = "2.48"
     implementation("com.google.dagger:hilt-android:${hiltVersion}")
-    ksp("com.google.dagger:hilt-compiler:${hiltVersion}")
+    kapt("com.google.dagger:hilt-compiler:${hiltVersion}")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
