@@ -2,6 +2,7 @@ package com.example.litenote.presentation.di.module
 
 import android.content.Context
 import androidx.room.Room
+import com.example.litenote.data.datasource.db.NoteDAO
 import com.example.litenote.data.datasource.db.NoteDatabase
 import dagger.Module
 import dagger.Provides
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+object DatabaseModule {
 
     @Provides
     @Singleton
@@ -22,6 +23,12 @@ class DatabaseModule {
             NoteDatabase::class.java,
             NoteDatabase.DATABASE_NAME
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesNoteDAO(db: NoteDatabase): NoteDAO {
+        return db.NoteDAO()
     }
 
 }
