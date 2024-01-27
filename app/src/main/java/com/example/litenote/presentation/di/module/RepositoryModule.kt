@@ -1,7 +1,5 @@
-package com.example.litenote.presentation.di.core
+package com.example.litenote.presentation.di.module
 
-import android.app.Application
-import androidx.room.Room
 import com.example.litenote.data.datasource.db.NoteDatabase
 import com.example.litenote.data.repository.NoteRepositoryImpl
 import com.example.litenote.domain.repository.NoteRepository
@@ -13,17 +11,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-
-    @Provides
-    @Singleton
-    fun providesNoteDatabase(app: Application): NoteDatabase {
-        return Room.databaseBuilder(
-            app.applicationContext,
-            NoteDatabase::class.java,
-            NoteDatabase.DATABASE_NAME
-        ).build()
-    }
+class RepositoryModule {
 
     @Provides
     @Singleton
