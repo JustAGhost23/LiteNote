@@ -9,6 +9,8 @@ import com.example.litenote.domain.model.Note
 @Database(entities = [Note::class], version = 1)
 abstract class NoteDatabase : RoomDatabase() {
 
+    abstract fun NoteDAO(): NoteDAO
+
     companion object {
         @Volatile
         private var INSTANCE: NoteDatabase? = null
