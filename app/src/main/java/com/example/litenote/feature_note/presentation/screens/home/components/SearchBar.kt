@@ -3,6 +3,7 @@ package com.example.litenote.feature_note.presentation.screens.home.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -33,6 +34,7 @@ fun SearchBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .padding(horizontal = 12.dp)
     ) {
         OutlinedTextField(
             value = searchContent,
@@ -54,16 +56,16 @@ fun SearchBar(
             },
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
-                unfocusedIndicatorColor = MaterialTheme.colorScheme.background,
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
                 unfocusedSupportingTextColor = MaterialTheme.colorScheme.onBackground,
                 focusedContainerColor = MaterialTheme.colorScheme.background,
-                focusedIndicatorColor = MaterialTheme.colorScheme.background,
+                focusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
                 errorIndicatorColor = MaterialTheme.colorScheme.error,
                 errorContainerColor = MaterialTheme.colorScheme.errorContainer,
                 cursorColor = MaterialTheme.colorScheme.primary
             ),
             textStyle = MaterialTheme.typography.bodyLarge,
-            shape = RoundedCornerShape(4.dp),
+            shape = RoundedCornerShape(16.dp),
             modifier = Modifier.fillMaxWidth()
         )
 

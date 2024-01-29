@@ -23,21 +23,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.presentation.screens.home.components.AddNoteButton
 import com.example.litenote.feature_note.presentation.screens.home.components.EmptyListDisplay
 import com.example.litenote.feature_note.presentation.screens.home.components.NoSearchResult
 import com.example.litenote.feature_note.presentation.screens.home.components.SearchBar
+import com.example.litenote.feature_note.presentation.screens.home.components.TopBar
 
 @Composable
 fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel(),
     onAddNoteButtonClicked: () -> Unit,
+    onViewNoteButtonClicked: (note: Note) -> Unit
 ) {
     var hideKeyboard by remember { mutableStateOf(false) }
     val notes = viewModel.notes.collectAsState()
     val searchQuery = viewModel.searchQuery
 
     Scaffold(
+        topBar = {
+            TopBar()
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddNoteButtonClicked,
@@ -54,12 +60,18 @@ fun HomeScreen(
             }
         }
     ) { paddingValues ->
+        fun onTap(note: Note) {
+            onViewNoteButtonClicked(note)
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(paddingValues)
                 .clickable { hideKeyboard = true }
         ) {
             SearchBar(
+                modifier = Modifier.padding(top = 12.dp),
                 searchContent = searchQuery,
                 onSearchContentChange = { viewModel.updateSearchQuery(it) },
                 hideKeyboard = hideKeyboard,
