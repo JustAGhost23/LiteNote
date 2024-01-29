@@ -30,6 +30,9 @@ fun Navigation(
 
             composable(route = NoteScreens.AddEditNoteScreen.route) {
             }
+
+            composable(route = NoteScreens.ViewNoteScreen.route) {
+            }
         }
     }
 }
