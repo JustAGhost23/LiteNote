@@ -25,7 +25,9 @@ fun Navigation(
         ) {
             composable(route = NoteScreens.HomeScreen.route) {
                 val viewModel = hiltViewModel<HomeScreenViewModel>()
-                HomeScreen(viewModel = viewModel)
+                HomeScreen(
+                    viewModel = viewModel,
+                    onAddNoteButtonClicked = { navHostController.navigate(NoteScreens.AddEditNoteScreen.route) })
             }
 
             composable(route = NoteScreens.AddEditNoteScreen.route) {
