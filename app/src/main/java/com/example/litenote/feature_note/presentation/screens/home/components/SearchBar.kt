@@ -54,10 +54,12 @@ fun SearchBar(
             },
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = MaterialTheme.colorScheme.background,
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.background,
+                unfocusedSupportingTextColor = MaterialTheme.colorScheme.onBackground,
                 focusedContainerColor = MaterialTheme.colorScheme.background,
+                focusedIndicatorColor = MaterialTheme.colorScheme.background,
                 errorIndicatorColor = MaterialTheme.colorScheme.error,
                 errorContainerColor = MaterialTheme.colorScheme.errorContainer,
-                unfocusedSupportingTextColor = MaterialTheme.colorScheme.onBackground,
                 cursorColor = MaterialTheme.colorScheme.primary
             ),
             textStyle = MaterialTheme.typography.bodyLarge,

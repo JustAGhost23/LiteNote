@@ -40,7 +40,7 @@ fun NoSearchResult(
                 )
                 Text(
                     text = "No Results for\n \"$query\"",
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center
                 )
             }
