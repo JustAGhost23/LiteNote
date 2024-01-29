@@ -1,11 +1,14 @@
 package com.example.litenote.core.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.litenote.core.navigation.utils.Subgraph
+import com.example.litenote.feature_note.presentation.screens.home.HomeScreen
+import com.example.litenote.feature_note.presentation.screens.home.HomeScreenViewModel
 import com.example.litenote.feature_note.presentation.util.NoteScreens
 
 @Composable
@@ -21,6 +24,8 @@ fun Navigation(
             route = Subgraph.NoteFeature.route
         ) {
             composable(route = NoteScreens.HomeScreen.route) {
+                val viewModel = hiltViewModel<HomeScreenViewModel>()
+                HomeScreen(viewModel = viewModel)
             }
 
             composable(route = NoteScreens.AddEditNoteScreen.route) {
