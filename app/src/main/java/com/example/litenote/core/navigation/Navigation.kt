@@ -42,7 +42,10 @@ fun Navigation(
                 val viewModel = hiltViewModel<AddEditNoteScreenViewModel>()
                 AddEditNoteScreen(
                     viewModel = viewModel,
-                    note = note
+                    note = note,
+                    onSetContent = { note = null },
+                    onSaveNoteButtonClicked = { navHostController.navigateUp() },
+                    onBackButtonClicked = { navHostController.navigateUp() }
                 )
             }
 
