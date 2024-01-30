@@ -41,11 +41,15 @@ fun HomeScreen(
     var hideKeyboard by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
     val notes = viewModel.notes.collectAsState()
+    val themeState = viewModel.themeState.collectAsState()
     val searchQuery = viewModel.searchQuery
 
     Scaffold(
         topBar = {
-            TopBar()
+            TopBar(
+                themeState = themeState,
+                onThemeButtonClicked = { viewModel.toggleTheme() }
+            )
         },
         floatingActionButton = {
             FloatingActionButton(

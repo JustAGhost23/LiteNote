@@ -1,19 +1,29 @@
 package com.example.litenote.feature_note.presentation.screens.home.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.litenote.R
 
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier,
+    themeState: State<Boolean>,
+    onThemeButtonClicked: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -22,14 +32,40 @@ fun TopBar(
                 color = MaterialTheme.colorScheme.primary
             )
     ) {
-        Text(
-            text = "LiteNote",
-            modifier = modifier.padding(
-                all = 12.dp
-            ),
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onPrimary,
-            fontWeight = FontWeight.Bold,
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "LiteNote",
+                modifier = modifier.padding(
+                    all = 12.dp
+                ),
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontWeight = FontWeight.Bold,
+            )
+            IconButton(
+                onClick = onThemeButtonClicked,
+                modifier = modifier
+                    .background(
+                        color = MaterialTheme.colorScheme.primary,
+                        shape = CircleShape
+                    )
+                    .padding(top = 4.dp)
+            ) {
+                Icon(
+                    painter = if (themeState.value) painterResource(
+                        id = R.drawable.light_mode_icon
+                    ) else painterResource(
+                        id = R.drawable.dark_mode_icon
+                    ),
+                    contentDescription = "Mode Toggle",
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+        }
     }
 }

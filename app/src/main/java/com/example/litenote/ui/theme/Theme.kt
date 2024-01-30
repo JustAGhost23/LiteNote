@@ -7,9 +7,12 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.litenote.feature_note.presentation.screens.home.HomeScreenViewModel
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -78,11 +81,13 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun LiteNoteTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    viewModel: HomeScreenViewModel = hiltViewModel(),
     content: @Composable () -> Unit
 ) {
+    val darkTheme = viewModel.themeState.collectAsState()
+
     val colorScheme = when {
-        darkTheme -> DarkColorScheme
+        darkTheme.value -> DarkColorScheme
         else -> LightColorScheme
     }
     val view = LocalView.current
@@ -90,7 +95,7 @@ fun LiteNoteTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme.value
         }
     }
 
