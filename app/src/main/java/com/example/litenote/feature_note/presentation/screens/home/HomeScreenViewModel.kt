@@ -47,4 +47,11 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
+    fun toggleFavouriteStatus(note: Note) {
+        val updatedNote = note.copy(isFavourite = !note.isFavourite)
+        viewModelScope.launch {
+            noteUseCases.updateUseCase(updatedNote)
+        }
+    }
+
 }

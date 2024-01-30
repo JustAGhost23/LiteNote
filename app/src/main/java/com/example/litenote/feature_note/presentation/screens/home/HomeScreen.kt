@@ -1,6 +1,7 @@
 package com.example.litenote.feature_note.presentation.screens.home
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,7 +28,7 @@ import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.presentation.screens.home.components.AddNoteButton
 import com.example.litenote.feature_note.presentation.screens.home.components.EmptyListDisplay
 import com.example.litenote.feature_note.presentation.screens.home.components.NoSearchResult
-import com.example.litenote.feature_note.presentation.screens.home.components.NoteGrid
+import com.example.litenote.feature_note.presentation.screens.home.components.NoteColumn
 import com.example.litenote.feature_note.presentation.screens.home.components.SearchBar
 import com.example.litenote.feature_note.presentation.screens.home.components.TopBar
 
@@ -38,6 +39,7 @@ fun HomeScreen(
     onViewNoteButtonClicked: (note: Note) -> Unit
 ) {
     var hideKeyboard by remember { mutableStateOf(false) }
+    val interactionSource = remember { MutableInteractionSource() }
     val notes = viewModel.notes.collectAsState()
     val searchQuery = viewModel.searchQuery
 
@@ -69,7 +71,11 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(paddingValues)
-                .clickable { hideKeyboard = true }
+                .clickable(
+                    onClick = { hideKeyboard = true },
+                    indication = null,
+                    interactionSource = interactionSource
+                )
         ) {
             SearchBar(
                 modifier = Modifier.padding(top = 12.dp),
@@ -98,11 +104,14 @@ fun HomeScreen(
                 )
             }
 
-            NoteGrid(
+            NoteColumn(
                 modifier = Modifier.padding(top = 12.dp),
                 notes = notes,
                 onTap = {
                     onTap(it)
+                },
+                onIconButtonClick = {
+                    viewModel.toggleFavouriteStatus(it)
                 }
             )
         }
