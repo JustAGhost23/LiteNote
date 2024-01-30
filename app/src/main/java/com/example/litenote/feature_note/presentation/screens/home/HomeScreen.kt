@@ -27,6 +27,7 @@ import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.presentation.screens.home.components.AddNoteButton
 import com.example.litenote.feature_note.presentation.screens.home.components.EmptyListDisplay
 import com.example.litenote.feature_note.presentation.screens.home.components.NoSearchResult
+import com.example.litenote.feature_note.presentation.screens.home.components.NoteGrid
 import com.example.litenote.feature_note.presentation.screens.home.components.SearchBar
 import com.example.litenote.feature_note.presentation.screens.home.components.TopBar
 
@@ -92,10 +93,18 @@ fun HomeScreen(
                 }
             } else if (notes.value.isEmpty() && searchQuery.isNotEmpty()) {
                 NoSearchResult(
+                    modifier = Modifier.padding(bottom = 64.dp),
                     query = searchQuery,
-                    modifier = Modifier.padding(bottom = 64.dp)
                 )
             }
+
+            NoteGrid(
+                modifier = Modifier.padding(top = 12.dp),
+                notes = notes,
+                onTap = {
+                    onTap(it)
+                }
+            )
         }
     }
 }
