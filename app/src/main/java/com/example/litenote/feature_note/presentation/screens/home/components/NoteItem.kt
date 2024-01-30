@@ -1,11 +1,17 @@
 package com.example.litenote.feature_note.presentation.screens.home.components
 
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,16 +50,25 @@ fun NoteItem(
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            Text(
-                text = note.title,
-                style = MaterialTheme.typography.headlineLarge,
-                fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.primary,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(bottom = 8.dp),
-                fontWeight = FontWeight.Black
-            )
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = note.title,
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontSize = 18.sp,
+                    color = MaterialTheme.colorScheme.primary,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    fontWeight = FontWeight.Black
+                )
+                Icon(
+                    imageVector = if (note.isFavourite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
+                    contentDescription = "Favourite",
+                    tint = MaterialTheme.colorScheme.onSecondary
+                )
+            }
             Text(
                 text = note.body,
                 style = MaterialTheme.typography.bodyLarge,

@@ -15,4 +15,7 @@ data class Note(
 
     @ColumnInfo(name = "body")
     var body: String,
+
+    @ColumnInfo(name = "isFavourite")
+    var isFavourite: Boolean,
 )
