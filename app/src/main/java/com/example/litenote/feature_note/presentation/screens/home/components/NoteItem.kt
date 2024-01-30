@@ -36,8 +36,8 @@ fun NoteItem(
             pressedElevation = 4.dp
         ),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
         ),
         modifier = modifier
             .pointerInput(Unit) {
@@ -66,13 +66,13 @@ fun NoteItem(
                 Icon(
                     imageVector = if (note.isFavourite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
                     contentDescription = "Favourite",
-                    tint = MaterialTheme.colorScheme.onSecondary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
             Text(
                 text = note.body,
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSecondary,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 6,
                 fontSize = 14.sp,
                 overflow = TextOverflow.Ellipsis

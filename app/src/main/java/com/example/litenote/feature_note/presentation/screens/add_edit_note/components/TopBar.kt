@@ -40,7 +40,8 @@ fun TopBar(
             Text(
                 text = if (note != null) "Update Note" else "Add Note",
                 modifier = modifier.padding(
-                    all = 12.dp
+                    horizontal = 4.dp,
+                    vertical = 16.dp
                 ),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimary,

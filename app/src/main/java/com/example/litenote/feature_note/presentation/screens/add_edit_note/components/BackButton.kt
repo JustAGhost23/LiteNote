@@ -19,14 +19,14 @@ fun BackButton(
         onClick = onButtonClick,
         modifier = modifier
             .background(
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.primary,
                 shape = CircleShape
             )
     ) {
         Icon(
             imageVector = Icons.Rounded.ArrowBack,
             contentDescription = "Go Back",
-            tint = MaterialTheme.colorScheme.primary
+            tint = MaterialTheme.colorScheme.onPrimary
         )
     }
 }
