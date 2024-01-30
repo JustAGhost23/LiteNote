@@ -20,7 +20,7 @@ interface NoteDAO {
     @Delete
     suspend fun delete(note: Note)
 
-    @Query("SELECT * FROM note_table")
+    @Query("SELECT * FROM note_table ORDER BY isFavourite DESC")
     fun getAllNotes(): Flow<List<Note>>
 
     @Query("SELECT * FROM note_table WHERE id = :id")
