@@ -12,7 +12,7 @@ import com.example.litenote.feature_note.presentation.screens.add_edit_note.AddE
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.AddEditNoteScreenViewModel
 import com.example.litenote.feature_note.presentation.screens.home.HomeScreen
 import com.example.litenote.feature_note.presentation.screens.home.HomeScreenViewModel
-import com.example.litenote.feature_note.presentation.util.NoteScreens
+import com.example.litenote.feature_note.presentation.utils.NoteScreens
 
 @Composable
 fun Navigation(

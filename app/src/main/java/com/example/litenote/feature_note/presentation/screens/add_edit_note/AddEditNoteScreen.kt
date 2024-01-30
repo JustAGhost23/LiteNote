@@ -1,6 +1,14 @@
 package com.example.litenote.feature_note.presentation.screens.add_edit_note
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -9,12 +17,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.components.SaveNoteButton
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.components.TopBar
+import com.example.litenote.feature_note.presentation.screens.add_edit_note.components.TextBox
+import com.example.litenote.feature_note.presentation.screens.add_edit_note.utils.TextType
 
 @Composable
 fun AddEditNoteScreen(
@@ -27,7 +39,6 @@ fun AddEditNoteScreen(
 ) {
     val title = viewModel.title
     val body = viewModel.body
-    val isFavourite = viewModel.isFavourite
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
@@ -67,6 +78,49 @@ fun AddEditNoteScreen(
             }
         }
     ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            TextBox(
+                textType = TextType.Title,
+                value = title,
+                onValueChange = {
+                    viewModel.updateTitle(it)
+                },
+                keyboardActions = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                ),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Next
+                ),
+                focusRequester = focusRequester
+            )
 
+            Box(
+                modifier = Modifier
+                    .padding(start = 12.dp)
+                    .size(
+                        width = 100.dp,
+                        height = 2.dp
+                    )
+                    .background(color = MaterialTheme.colorScheme.primary)
+            )
+
+            TextBox(
+                textType = TextType.Body,
+                value = body,
+                onValueChange = {
+                    viewModel.updateBody(it)
+                },
+                keyboardActions = KeyboardActions(
+                    onDone = { focusManager.clearFocus() }
+                ),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done
+                )
+            )
+        }
     }
 }

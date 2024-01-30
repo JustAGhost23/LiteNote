@@ -18,7 +18,6 @@ class AddEditNoteScreenViewModel @Inject constructor (
 
     var title: String by mutableStateOf("")
     var body: String by mutableStateOf("")
-    var isFavourite: Boolean by mutableStateOf(false)
     var currentNote: Note? = null
 
     fun updateTitle(value: String) {
@@ -29,15 +28,11 @@ class AddEditNoteScreenViewModel @Inject constructor (
         body = value
     }
 
-    fun updateIsFavourite(value: Boolean) {
-        isFavourite = value
-    }
-
     fun addNote() {
         val newNote = Note(
             title = title.ifBlank { "Title" },
             body = body.ifBlank { "Body" },
-            isFavourite = isFavourite
+            isFavourite = false
         )
         viewModelScope.launch {
             useCases.insertUseCase(newNote)
@@ -50,7 +45,6 @@ class AddEditNoteScreenViewModel @Inject constructor (
             if (currentNote != null) {
                 title = currentNote!!.title
                 body = currentNote!!.body
-                isFavourite = currentNote!!.isFavourite
             }
         }
     }
@@ -60,7 +54,7 @@ class AddEditNoteScreenViewModel @Inject constructor (
             id = currentNote!!.id,
             title = title,
             body = body,
-            isFavourite = isFavourite
+            isFavourite = currentNote!!.isFavourite
         )
         viewModelScope.launch {
             useCases.updateUseCase(updatedNote)

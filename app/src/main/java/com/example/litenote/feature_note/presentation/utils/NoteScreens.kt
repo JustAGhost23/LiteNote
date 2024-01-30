@@ -1,4 +1,4 @@
-package com.example.litenote.feature_note.presentation.util
+package com.example.litenote.feature_note.presentation.utils
 
 sealed class NoteScreens(val route: String) {
     data object HomeScreen : NoteScreens("home_screen")
