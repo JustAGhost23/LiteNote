@@ -95,6 +95,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}")
 
+    // Datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
