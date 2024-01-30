@@ -33,6 +33,7 @@ object DatabaseModule {
     }
 
     @Provides
+    @Singleton
     fun providePreferencesDataStoreUtil(@ApplicationContext context: Context): PreferencesDataStoreUtil {
         return PreferencesDataStoreUtil(context)
     }
