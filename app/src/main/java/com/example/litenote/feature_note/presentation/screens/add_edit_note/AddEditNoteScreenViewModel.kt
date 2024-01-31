@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddEditNoteScreenViewModel @Inject constructor (
-    private val useCases: NoteUseCases,
+    private val noteUseCases: NoteUseCases,
 ) : ViewModel() {
 
     var title: String by mutableStateOf("")
@@ -35,13 +35,13 @@ class AddEditNoteScreenViewModel @Inject constructor (
             isFavourite = false
         )
         viewModelScope.launch {
-            useCases.insertUseCase(newNote)
+            noteUseCases.insertUseCase(newNote)
         }
     }
 
     fun getNote(id: Long) {
         viewModelScope.launch {
-            currentNote = useCases.getByIdUseCase(id)
+            currentNote = noteUseCases.getByIdUseCase(id)
             if (currentNote != null) {
                 title = currentNote!!.title
                 body = currentNote!!.body
@@ -57,7 +57,7 @@ class AddEditNoteScreenViewModel @Inject constructor (
             isFavourite = currentNote!!.isFavourite
         )
         viewModelScope.launch {
-            useCases.updateUseCase(updatedNote)
+            noteUseCases.updateUseCase(updatedNote)
         }
     }
 
