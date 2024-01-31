@@ -89,18 +89,9 @@ fun HomeScreen(
                 onFocusClear = { hideKeyboard = false }
             )
             if (notes.value.isEmpty() && searchQuery.isEmpty()) {
-                Box(contentAlignment = Alignment.Center) {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        item {
-                            EmptyListDisplay(
-                                modifier = Modifier.padding(bottom = 64.dp)
-                            )
-                        }
-                    }
-                }
+                EmptyListDisplay(
+                    modifier = Modifier.padding(bottom = 64.dp)
+                )
             } else if (notes.value.isEmpty() && searchQuery.isNotEmpty()) {
                 NoSearchResult(
                     modifier = Modifier.padding(bottom = 64.dp),
