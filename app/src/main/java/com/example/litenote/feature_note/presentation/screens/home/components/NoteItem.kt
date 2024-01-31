@@ -75,7 +75,7 @@ fun NoteItem(
                     onClick = {
                         onIconButtonClick(note)
                     },
-                    modifier = Modifier.weight(1f, fill = false)
+                    modifier = Modifier.weight(0.2f, fill = false)
                 ) {
                     Icon(
                         imageVector = if (note.isFavourite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
