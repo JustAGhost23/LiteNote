@@ -12,6 +12,8 @@ import com.example.litenote.feature_note.presentation.screens.add_edit_note.AddE
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.AddEditNoteScreenViewModel
 import com.example.litenote.feature_note.presentation.screens.home.HomeScreen
 import com.example.litenote.feature_note.presentation.screens.home.HomeScreenViewModel
+import com.example.litenote.feature_note.presentation.screens.view_note.ViewNoteScreen
+import com.example.litenote.feature_note.presentation.screens.view_note.ViewNoteScreenViewModel
 import com.example.litenote.feature_note.presentation.utils.NoteScreens
 
 @Composable
@@ -50,6 +52,15 @@ fun Navigation(
             }
 
             composable(route = NoteScreens.ViewNoteScreen.route) {
+                val viewModel = hiltViewModel<ViewNoteScreenViewModel>()
+                ViewNoteScreen(
+                    viewModel = viewModel,
+                    note = note,
+                    onSetContent = { note = null },
+                    onBackButtonClicked = { navHostController.navigateUp() },
+                    onEditButtonClicked = { navHostController.navigate(NoteScreens.AddEditNoteScreen.route) },
+                    onDeleteButtonClicked = { navHostController.navigateUp() }
+                )
             }
         }
     }
