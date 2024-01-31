@@ -2,6 +2,7 @@ package com.example.litenote.feature_note.presentation.screens.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,6 +12,7 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +40,12 @@ fun HomeScreen(
     val interactionSource = remember { MutableInteractionSource() }
     val notes = viewModel.notes.collectAsState()
     val themeState = viewModel.themeState.collectAsState()
+    val isDarkTheme = isSystemInDarkTheme()
     val searchQuery = viewModel.searchQuery
+
+    LaunchedEffect(Unit) {
+        viewModel.setTheme(isDarkTheme)
+    }
 
     Scaffold(
         topBar = {

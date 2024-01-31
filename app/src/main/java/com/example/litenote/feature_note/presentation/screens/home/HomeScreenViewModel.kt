@@ -1,6 +1,5 @@
 package com.example.litenote.feature_note.presentation.screens.home
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -12,7 +11,6 @@ import com.example.litenote.core.utils.PreferencesDataStoreUtil.Companion.IS_DAR
 import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.domain.usecase.NoteUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -75,12 +73,18 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
+    fun setTheme(isDarkTheme: Boolean) {
+        viewModelScope.launch {
+            preferencesDataStore.edit { preferences ->
+                preferences[IS_DARK_MODE_KEY] = isDarkTheme
+            }
+        }
+    }
+
     fun toggleTheme() {
         viewModelScope.launch {
             preferencesDataStore.edit { preferences ->
                 preferences[IS_DARK_MODE_KEY] = !(preferences[IS_DARK_MODE_KEY] ?: false)
-                Log.d("Prefs", preferences[IS_DARK_MODE_KEY].toString())
-                Log.d("Prefs", _themeState.value.toString())
             }
         }
     }
