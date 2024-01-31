@@ -76,7 +76,9 @@ class HomeScreenViewModel @Inject constructor(
     fun setTheme(isDarkTheme: Boolean) {
         viewModelScope.launch {
             preferencesDataStore.edit { preferences ->
-                preferences[IS_DARK_MODE_KEY] = isDarkTheme
+                if (preferences[IS_DARK_MODE_KEY] == null) {
+                    preferences[IS_DARK_MODE_KEY] = isDarkTheme
+                }
             }
         }
     }
