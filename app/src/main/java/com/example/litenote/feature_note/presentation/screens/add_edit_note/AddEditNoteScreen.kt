@@ -99,7 +99,6 @@ fun AddEditNoteScreen(
                 ),
                 focusRequester = focusRequester
             )
-
             Box(
                 modifier = Modifier
                     .padding(start = 12.dp)
@@ -109,7 +108,6 @@ fun AddEditNoteScreen(
                     )
                     .background(color = MaterialTheme.colorScheme.primary)
             )
-
             TextBox(
                 textType = TextType.Body,
                 value = body,

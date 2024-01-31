@@ -1,5 +1,11 @@
 package com.example.litenote.feature_note.presentation.screens.view_note
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -12,7 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.presentation.screens.view_note.components.EditNoteButton
+import com.example.litenote.feature_note.presentation.screens.view_note.components.TextDisplay
 import com.example.litenote.feature_note.presentation.screens.view_note.components.TopBar
+import com.example.litenote.feature_note.presentation.screens.view_note.utils.TextType
 
 @Composable
 fun ViewNoteScreen(
@@ -36,7 +44,7 @@ fun ViewNoteScreen(
             TopBar(
                 onBackButtonClicked = onBackButtonClicked,
                 onDeleteButtonClicked = {
-                    if(viewModel.currentNote != null) {
+                    if (viewModel.currentNote != null) {
                         viewModel.deleteNote()
                     }
                     onDeleteButtonClicked()
@@ -46,7 +54,7 @@ fun ViewNoteScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    if(viewModel.currentNote != null) {
+                    if (viewModel.currentNote != null) {
                         onEditButtonClicked(viewModel.currentNote!!)
                     }
                 },
@@ -63,6 +71,34 @@ fun ViewNoteScreen(
             }
         }
     ) { paddingValues ->
-
+        Column(
+            modifier = Modifier
+                .padding(paddingValues),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            if (viewModel.currentNote != null) {
+                TextDisplay(
+                    modifier = Modifier.padding(all = 16.dp),
+                    textType = TextType.Title,
+                    value = viewModel.currentNote!!.title,
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .padding(start = 12.dp)
+                    .size(
+                        width = 100.dp,
+                        height = 2.dp
+                    )
+                    .background(color = MaterialTheme.colorScheme.primary)
+            )
+            if (viewModel.currentNote != null) {
+                TextDisplay(
+                    modifier = Modifier.padding(all = 16.dp),
+                    textType = TextType.Body,
+                    value = viewModel.currentNote!!.body,
+                )
+            }
+        }
     }
 }

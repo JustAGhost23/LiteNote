@@ -29,6 +29,7 @@ import com.example.litenote.feature_note.presentation.screens.home.components.To
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     viewModel: HomeScreenViewModel = hiltViewModel(),
     onAddNoteButtonClicked: () -> Unit,
     onViewNoteButtonClicked: (note: Note) -> Unit
@@ -93,7 +94,6 @@ fun HomeScreen(
                     query = searchQuery,
                 )
             }
-
             NoteColumn(
                 modifier = Modifier.padding(top = 12.dp),
                 notes = notes,
