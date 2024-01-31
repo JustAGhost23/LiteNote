@@ -66,13 +66,16 @@ fun NoteItem(
                     color = MaterialTheme.colorScheme.primary,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(top = 12.dp),
+                    modifier = Modifier
+                        .padding(top = 12.dp)
+                        .weight(1f, fill = false),
                     fontWeight = FontWeight.Black
                 )
                 IconButton(
                     onClick = {
                         onIconButtonClick(note)
-                    }
+                    },
+                    modifier = Modifier.weight(1f, fill = false)
                 ) {
                     Icon(
                         imageVector = if (note.isFavourite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
