@@ -21,4 +21,10 @@ class ViewNoteScreenViewModel @Inject constructor (
         }
     }
 
+    fun deleteNote() {
+        viewModelScope.launch {
+            noteUseCases.deleteUseCase(currentNote!!)
+        }
+    }
+
 }

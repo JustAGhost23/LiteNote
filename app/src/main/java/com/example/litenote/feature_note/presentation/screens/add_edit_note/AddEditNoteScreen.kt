@@ -59,10 +59,12 @@ fun AddEditNoteScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    if (viewModel.currentNote != null)
+                    if (viewModel.currentNote != null) {
                         viewModel.updateNote()
-                    else
+                    }
+                    else {
                         viewModel.addNote()
+                    }
                     onSaveNoteButtonClicked()
                 },
                 shape = RoundedCornerShape(4.dp),

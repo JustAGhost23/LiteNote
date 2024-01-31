@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.presentation.screens.view_note.components.EditNoteButton
+import com.example.litenote.feature_note.presentation.screens.view_note.components.TopBar
 
 @Composable
 fun ViewNoteScreen(
@@ -31,10 +32,23 @@ fun ViewNoteScreen(
     }
 
     Scaffold(
+        topBar = {
+            TopBar(
+                onBackButtonClicked = onBackButtonClicked,
+                onDeleteButtonClicked = {
+                    if(viewModel.currentNote != null) {
+                        viewModel.deleteNote()
+                    }
+                    onDeleteButtonClicked()
+                }
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    onEditButtonClicked(viewModel.currentNote!!)
+                    if(viewModel.currentNote != null) {
+                        onEditButtonClicked(viewModel.currentNote!!)
+                    }
                 },
                 shape = RoundedCornerShape(4.dp),
                 containerColor = MaterialTheme.colorScheme.primary,

@@ -58,7 +58,10 @@ fun Navigation(
                     note = note,
                     onSetContent = { note = null },
                     onBackButtonClicked = { navHostController.navigateUp() },
-                    onEditButtonClicked = { navHostController.navigate(NoteScreens.AddEditNoteScreen.route) },
+                    onEditButtonClicked = {
+                        note = it
+                        navHostController.navigate(NoteScreens.AddEditNoteScreen.route)
+                    },
                     onDeleteButtonClicked = { navHostController.navigateUp() }
                 )
             }
