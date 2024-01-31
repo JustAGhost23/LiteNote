@@ -46,7 +46,13 @@ fun Navigation(
                     viewModel = viewModel,
                     note = note,
                     onSetContent = { note = null },
-                    onSaveNoteButtonClicked = { navHostController.navigateUp() },
+                    onSaveNoteButtonClicked = {
+                        navHostController.navigate(NoteScreens.HomeScreen.route) {
+                            popUpTo(NoteScreens.HomeScreen.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
                     onBackButtonClicked = { navHostController.navigateUp() }
                 )
             }
