@@ -34,9 +34,32 @@ fun ViewNoteScreen(
     onEditButtonClicked: (note: Note) -> Unit,
     onDeleteButtonClicked: () -> Unit
 ) {
+    ViewNoteScreenContent(
+        note = note,
+        currentNote = viewModel.currentNote,
+        onGetNote = { viewModel.getNote(it) },
+        onSetContent = onSetContent,
+        onDeleteNote = { viewModel.deleteNote() },
+        onBackButtonClicked = onBackButtonClicked,
+        onEditButtonClicked = onEditButtonClicked,
+        onDeleteButtonClicked = onDeleteButtonClicked
+    )
+}
+
+@Composable
+fun ViewNoteScreenContent(
+    note: Note?,
+    currentNote: Note?,
+    onGetNote: (long: Long) -> Unit,
+    onSetContent: () -> Unit,
+    onDeleteNote: () -> Unit,
+    onBackButtonClicked: () -> Unit,
+    onEditButtonClicked: (note: Note) -> Unit,
+    onDeleteButtonClicked: () -> Unit
+) {
     LaunchedEffect(Unit) {
         if (note != null) {
-            viewModel.getNote(note.id)
+            onGetNote(note.id)
             onSetContent()
         }
     }
@@ -46,8 +69,8 @@ fun ViewNoteScreen(
             TopBar(
                 onBackButtonClicked = onBackButtonClicked,
                 onDeleteButtonClicked = {
-                    if (viewModel.currentNote != null) {
-                        viewModel.deleteNote()
+                    if (currentNote != null) {
+                        onDeleteNote()
                     }
                     onDeleteButtonClicked()
                 }
@@ -56,8 +79,8 @@ fun ViewNoteScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    if (viewModel.currentNote != null) {
-                        onEditButtonClicked(viewModel.currentNote!!)
+                    if (currentNote != null) {
+                        onEditButtonClicked(currentNote)
                     }
                 },
                 shape = RoundedCornerShape(4.dp),
@@ -79,11 +102,11 @@ fun ViewNoteScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            if (viewModel.currentNote != null) {
+            if (currentNote != null) {
                 TextDisplay(
                     modifier = Modifier.padding(all = 16.dp),
                     textType = TextType.Title,
-                    value = viewModel.currentNote!!.title,
+                    value = currentNote.title,
                 )
             }
             Box(
@@ -95,11 +118,11 @@ fun ViewNoteScreen(
                     )
                     .background(color = MaterialTheme.colorScheme.primary)
             )
-            if (viewModel.currentNote != null) {
+            if (currentNote != null) {
                 TextDisplay(
                     modifier = Modifier.padding(all = 16.dp),
                     textType = TextType.Body,
-                    value = viewModel.currentNote!!.body,
+                    value = currentNote.body,
                 )
             }
         }
