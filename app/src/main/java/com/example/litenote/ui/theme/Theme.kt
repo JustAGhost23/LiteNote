@@ -1,7 +1,6 @@
 package com.example.litenote.ui.theme
 
 import android.app.Activity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -86,8 +85,16 @@ fun LiteNoteTheme(
 ) {
     val darkTheme = viewModel.themeState.collectAsState()
 
+    LiteNoteThemeContent(darkTheme = darkTheme.value, content = content)
+}
+
+@Composable
+fun LiteNoteThemeContent(
+    darkTheme: Boolean,
+    content: @Composable () -> Unit
+) {
     val colorScheme = when {
-        darkTheme.value -> DarkColorScheme
+        darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
     val view = LocalView.current
@@ -95,7 +102,7 @@ fun LiteNoteTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme.value
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 

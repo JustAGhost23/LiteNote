@@ -22,6 +22,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.litenote.feature_note.domain.model.Note
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.components.SaveNoteButton
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.components.TopBar
@@ -31,7 +32,7 @@ import com.example.litenote.feature_note.presentation.screens.add_edit_note.util
 @Composable
 fun AddEditNoteScreen(
     modifier: Modifier = Modifier,
-    viewModel: AddEditNoteScreenViewModel,
+    viewModel: AddEditNoteScreenViewModel = hiltViewModel(),
     note: Note?,
     onSetContent: () -> Unit,
     onSaveNoteButtonClicked: () -> Unit,
