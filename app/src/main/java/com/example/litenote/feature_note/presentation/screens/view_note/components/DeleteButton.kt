@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.view_note.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -11,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun DeleteButton(
@@ -45,6 +48,32 @@ fun DeleteButton(
             imageVector = Icons.Rounded.Delete,
             contentDescription = "Delete",
             tint = MaterialTheme.colorScheme.onPrimary
+        )
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun DeleteButtonLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        DeleteButton(
+            onButtonClick = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun DeleteButtonDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        DeleteButton(
+            onButtonClick = {}
         )
     }
 }

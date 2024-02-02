@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.view_note
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,6 +17,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.litenote.feature_note.domain.model.Note
@@ -23,6 +25,7 @@ import com.example.litenote.feature_note.presentation.screens.view_note.componen
 import com.example.litenote.feature_note.presentation.screens.view_note.components.TextDisplay
 import com.example.litenote.feature_note.presentation.screens.view_note.components.TopBar
 import com.example.litenote.feature_note.presentation.screens.view_note.utils.TextType
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun ViewNoteScreen(
@@ -126,5 +129,49 @@ fun ViewNoteScreenContent(
                 )
             }
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun ViewNoteScreenContentLightThemePreview() {
+    LiteNoteThemeContent(
+        darkTheme = false
+    ) {
+        ViewNoteScreenContent(
+            note = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            currentNote = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            onGetNote = {},
+            onSetContent = {},
+            onDeleteNote = {},
+            onBackButtonClicked = {},
+            onEditButtonClicked = {},
+            onDeleteButtonClicked = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun ViewNoteScreenContentDarkThemePreview() {
+    LiteNoteThemeContent(
+        darkTheme = true
+    ) {
+        ViewNoteScreenContent(
+            note = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            currentNote = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            onGetNote = {},
+            onSetContent = {},
+            onDeleteNote = {},
+            onBackButtonClicked = {},
+            onEditButtonClicked = {},
+            onDeleteButtonClicked = {}
+        )
     }
 }

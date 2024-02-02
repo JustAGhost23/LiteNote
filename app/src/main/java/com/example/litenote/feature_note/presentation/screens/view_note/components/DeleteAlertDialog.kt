@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.view_note.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -22,8 +23,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun DeleteAlertDialog(
@@ -118,5 +121,35 @@ fun DeleteAlertDialog(
                 }
             }
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun DeleteAlertDialogLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        DeleteAlertDialog(
+            showDialog = true,
+            onDismiss = {},
+            onConfirm = {},
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun DeleteAlertDialogDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        DeleteAlertDialog(
+            showDialog = true,
+            onDismiss = {},
+            onConfirm = {},
+        )
     }
 }

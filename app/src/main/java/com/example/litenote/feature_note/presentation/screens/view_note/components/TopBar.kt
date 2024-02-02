@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.view_note.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun TopBar(
@@ -59,5 +62,33 @@ fun TopBar(
                 onButtonClick = onDeleteButtonClicked
             )
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun TopBarLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        TopBar(
+            onBackButtonClicked = {},
+            onDeleteButtonClicked = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun TopBarDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        TopBar(
+            onBackButtonClicked = {},
+            onDeleteButtonClicked = {}
+        )
     }
 }
