@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.add_edit_note.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -12,7 +13,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.utils.TextType
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun TextBox(
@@ -71,5 +74,77 @@ fun TextBox(
         LaunchedEffect(Unit) {
             focusRequester!!.requestFocus()
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun TextBoxTitleTypeLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        TextBox(
+            textType = TextType.Title,
+            value = "",
+            onValueChange = {},
+            keyboardActions = KeyboardActions(),
+            keyboardOptions = KeyboardOptions(),
+            focusRequester = FocusRequester(),
+        )
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun TextBoxBodyTypeLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        TextBox(
+            textType = TextType.Body,
+            value = "",
+            onValueChange = {},
+            keyboardActions = KeyboardActions(),
+            keyboardOptions = KeyboardOptions(),
+            focusRequester = FocusRequester(),
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun TextBoxTitleTypeDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        TextBox(
+            textType = TextType.Title,
+            value = "",
+            onValueChange = {},
+            keyboardActions = KeyboardActions(),
+            keyboardOptions = KeyboardOptions(),
+            focusRequester = FocusRequester(),
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun TextBoxBodyTypeDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        TextBox(
+            textType = TextType.Body,
+            value = "",
+            onValueChange = {},
+            keyboardActions = KeyboardActions(),
+            keyboardOptions = KeyboardOptions(),
+            focusRequester = FocusRequester(),
+        )
     }
 }

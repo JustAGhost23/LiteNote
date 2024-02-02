@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.add_edit_note.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.litenote.feature_note.domain.model.Note
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun TopBar(
@@ -48,5 +51,61 @@ fun TopBar(
                 fontWeight = FontWeight.Bold,
             )
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun TopBarAddNoteLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        TopBar(
+            note = null,
+            onBackButtonClicked = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun TopBarEditNoteLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        TopBar(
+            note = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            onBackButtonClicked = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun TopBarAddNoteDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        TopBar(
+            note = null,
+            onBackButtonClicked = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun TopBarEditNoteDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        TopBar(
+            note = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            onBackButtonClicked = {}
+        )
     }
 }

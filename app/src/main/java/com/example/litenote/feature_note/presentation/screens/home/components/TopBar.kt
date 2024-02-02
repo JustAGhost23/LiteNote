@@ -77,7 +77,7 @@ fun TopBar(
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Composable
-fun TopBarLightPreview() {
+fun TopBarLightThemePreview() {
     LiteNoteThemeContent(darkTheme = false) {
         TopBar(
             themeState = false,
@@ -91,7 +91,7 @@ fun TopBarLightPreview() {
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Composable
-fun TopBarDarkModePreview() {
+fun TopBarDarkThemePreview() {
     LiteNoteThemeContent(darkTheme = true) {
         TopBar(
             themeState = true,

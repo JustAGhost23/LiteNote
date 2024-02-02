@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.add_edit_note
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,6 +23,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.litenote.feature_note.domain.model.Note
@@ -29,6 +31,7 @@ import com.example.litenote.feature_note.presentation.screens.add_edit_note.comp
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.components.TopBar
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.components.TextBox
 import com.example.litenote.feature_note.presentation.screens.add_edit_note.utils.TextType
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun AddEditNoteScreen(
@@ -98,8 +101,7 @@ fun AddEditNoteScreenContent(
                 onClick = {
                     if (currentNote != null) {
                         onUpdateNote()
-                    }
-                    else {
+                    } else {
                         onAddNote()
                     }
                     onSaveNoteButtonClicked()
@@ -159,5 +161,61 @@ fun AddEditNoteScreenContent(
                 )
             )
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun AddEditNoteScreenContentLightThemePreview() {
+    LiteNoteThemeContent(
+        darkTheme = false,
+    ) {
+        AddEditNoteScreenContent(
+            note = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            currentNote = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            title = "Title",
+            body = "Body",
+            focusManager = LocalFocusManager.current,
+            focusRequester = FocusRequester(),
+            onGetNote = {},
+            onSetContent = {},
+            onBackButtonClicked = {},
+            onSaveNoteButtonClicked = {},
+            onUpdateNote = {},
+            onAddNote = {},
+            onUpdateTitle = {},
+            onUpdateBody = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun AddEditNoteScreenContentDarkThemePreview() {
+    LiteNoteThemeContent(
+        darkTheme = true,
+    ) {
+        AddEditNoteScreenContent(
+            note = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            currentNote = Note(id = 1, title = "Title", body = "Body", isFavourite = false),
+            title = "Title",
+            body = "Body",
+            focusManager = LocalFocusManager.current,
+            focusRequester = FocusRequester(),
+            onGetNote = {},
+            onSetContent = {},
+            onBackButtonClicked = {},
+            onSaveNoteButtonClicked = {},
+            onUpdateNote = {},
+            onAddNote = {},
+            onUpdateTitle = {},
+            onUpdateBody = {}
+        )
     }
 }
