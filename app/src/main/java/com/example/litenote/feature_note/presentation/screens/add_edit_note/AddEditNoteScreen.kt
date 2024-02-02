@@ -18,6 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
@@ -43,9 +44,44 @@ fun AddEditNoteScreen(
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
+    AddEditNoteScreenContent(
+        note = note,
+        currentNote = viewModel.currentNote,
+        title = title,
+        body = body,
+        focusManager = focusManager,
+        focusRequester = focusRequester,
+        onGetNote = { viewModel.getNote(it) },
+        onSetContent = onSetContent,
+        onBackButtonClicked = onBackButtonClicked,
+        onSaveNoteButtonClicked = onSaveNoteButtonClicked,
+        onUpdateNote = { viewModel.updateNote() },
+        onAddNote = { viewModel.addNote() },
+        onUpdateTitle = { viewModel.updateTitle(it) },
+        onUpdateBody = { viewModel.updateBody(it) }
+    )
+}
+
+@Composable
+fun AddEditNoteScreenContent(
+    note: Note?,
+    currentNote: Note?,
+    title: String,
+    body: String,
+    focusManager: FocusManager,
+    focusRequester: FocusRequester,
+    onGetNote: (long: Long) -> Unit,
+    onSetContent: () -> Unit,
+    onBackButtonClicked: () -> Unit,
+    onSaveNoteButtonClicked: () -> Unit,
+    onUpdateNote: () -> Unit,
+    onAddNote: () -> Unit,
+    onUpdateTitle: (string: String) -> Unit,
+    onUpdateBody: (string: String) -> Unit
+) {
     LaunchedEffect(Unit) {
         if (note != null) {
-            viewModel.getNote(note.id)
+            onGetNote(note.id)
             onSetContent()
         }
     }
@@ -53,18 +89,18 @@ fun AddEditNoteScreen(
     Scaffold(
         topBar = {
             TopBar(
-                note = viewModel.currentNote,
+                note = currentNote,
                 onBackButtonClicked = onBackButtonClicked
             )
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    if (viewModel.currentNote != null) {
-                        viewModel.updateNote()
+                    if (currentNote != null) {
+                        onUpdateNote()
                     }
                     else {
-                        viewModel.addNote()
+                        onAddNote()
                     }
                     onSaveNoteButtonClicked()
                 },
@@ -90,7 +126,7 @@ fun AddEditNoteScreen(
                 textType = TextType.Title,
                 value = title,
                 onValueChange = {
-                    viewModel.updateTitle(it)
+                    onUpdateTitle(it)
                 },
                 keyboardActions = KeyboardActions(
                     onNext = { focusManager.moveFocus(FocusDirection.Down) }
@@ -113,7 +149,7 @@ fun AddEditNoteScreen(
                 textType = TextType.Body,
                 value = body,
                 onValueChange = {
-                    viewModel.updateBody(it)
+                    onUpdateBody(it)
                 },
                 keyboardActions = KeyboardActions(
                     onDone = { focusManager.clearFocus() }
