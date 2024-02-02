@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.home.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,9 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.litenote.feature_note.domain.model.Note
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun NoteItem(
@@ -93,5 +96,45 @@ fun NoteItem(
                 overflow = TextOverflow.Ellipsis
             )
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun NoteItemLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        NoteItem(
+            note = Note(
+                id = 1,
+                title = "Title 1",
+                body = "Body 1",
+                isFavourite = true
+            ),
+            onTap = {},
+            onIconButtonClick = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun NoteItemDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        NoteItem(
+            note = Note(
+                id = 1,
+                title = "Title 1",
+                body = "Body 1",
+                isFavourite = true
+            ),
+            onTap = {},
+            onIconButtonClick = {}
+        )
     }
 }

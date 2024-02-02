@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.home.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,8 +18,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.litenote.R
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun SearchBar(
@@ -33,7 +36,6 @@ fun SearchBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp)
     ) {
         OutlinedTextField(
             value = searchContent,
@@ -72,5 +74,39 @@ fun SearchBar(
             focusManager.clearFocus()
             onFocusClear()
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun SearchBarLightThemePreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        SearchBar(
+            modifier = Modifier.padding(vertical = 12.dp, horizontal = 12.dp),
+            searchContent = "",
+            onSearchContentChange = {},
+            hideKeyboard = false,
+            onFocusClear = {}
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun SearchBarDarkThemePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        SearchBar(
+            modifier = Modifier.padding(vertical = 12.dp, horizontal = 12.dp),
+            searchContent = "",
+            onSearchContentChange = {},
+            hideKeyboard = false,
+            onFocusClear = {}
+        )
     }
 }

@@ -31,7 +31,6 @@ import com.example.litenote.feature_note.presentation.screens.home.components.No
 import com.example.litenote.feature_note.presentation.screens.home.components.NoteColumn
 import com.example.litenote.feature_note.presentation.screens.home.components.SearchBar
 import com.example.litenote.feature_note.presentation.screens.home.components.TopBar
-import com.example.litenote.ui.theme.LiteNoteTheme
 import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
@@ -125,7 +124,7 @@ fun HomeScreenContent(
                 )
         ) {
             SearchBar(
-                modifier = Modifier.padding(top = 12.dp),
+                modifier = Modifier.padding(vertical = 12.dp, horizontal = 12.dp),
                 searchContent = searchQuery,
                 onSearchContentChange = onSearchContentChange,
                 hideKeyboard = hideKeyboard,
@@ -142,7 +141,7 @@ fun HomeScreenContent(
                 )
             }
             NoteColumn(
-                modifier = Modifier.padding(top = 12.dp),
+                modifier = Modifier.padding(vertical = 12.dp, horizontal = 12.dp),
                 notes = notes,
                 onTap = {
                     onTap(it)

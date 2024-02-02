@@ -1,5 +1,6 @@
 package com.example.litenote.feature_note.presentation.screens.home.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,17 +13,18 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.litenote.R
+import com.example.litenote.ui.theme.LiteNoteThemeContent
 
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier,
-    themeState: State<Boolean>,
+    themeState: Boolean,
     onThemeButtonClicked: () -> Unit
 ) {
     Column(
@@ -57,7 +59,7 @@ fun TopBar(
                     .padding(top = 4.dp)
             ) {
                 Icon(
-                    painter = if (themeState.value) painterResource(
+                    painter = if (themeState) painterResource(
                         id = R.drawable.light_mode_icon
                     ) else painterResource(
                         id = R.drawable.dark_mode_icon
@@ -67,5 +69,33 @@ fun TopBar(
                 )
             }
         }
+    }
+}
+
+@Preview(
+    name = "Light Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun TopBarLightPreview() {
+    LiteNoteThemeContent(darkTheme = false) {
+        TopBar(
+            themeState = false,
+            onThemeButtonClicked = {},
+        )
+    }
+}
+
+@Preview(
+    name = "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun TopBarDarkModePreview() {
+    LiteNoteThemeContent(darkTheme = true) {
+        TopBar(
+            themeState = true,
+            onThemeButtonClicked = {},
+        )
     }
 }
