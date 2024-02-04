@@ -101,11 +101,6 @@ dependencies {
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
-    // Live Data
-    val livedataVersion = "2.7.0"
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${livedataVersion}")
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
-
     // Room
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
